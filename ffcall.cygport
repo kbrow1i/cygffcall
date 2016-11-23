@@ -1,0 +1,34 @@
+NAME="ffcall"
+VERSION=20150216
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Foreign function call libraries"
+DESCRIPTION="This is a collection of four libraries which can be used to build
+foreign function call interfaces in embedded interpreters.  It is
+required by clisp."
+HOMEPAGE="http://www.haible.de/bruno/packages-ffcall.html"
+
+# SRC_URI="ftp://ftp.santafe.edu/pub/gnu/${PN}-${PV}.tar.gz"
+
+CVS_URI=":pserver:anonymous@cvs.savannah.gnu.org:/sources/libffcall"
+inherit cvs
+
+# PATCH_URI="1.10-reini.patch"	# Formerly ffcall-1.10-1.src.patch
+
+MAKEOPTS="-j1"
+
+export CFLAGS=${CFLAGS:-"-O2 -pipe"};
+export CXXFLAGS=${CXXFLAGS:-"-O2 -pipe"};
+
+src_compile() {
+   lndirs
+   cd ${B}
+   cygconf
+   cygmake 
+}
+
+src_install() {
+   cd ${B}
+   cyginstall htmldir=/usr/share/doc/${PN}-${PV}/html
+}
+
