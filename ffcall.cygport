@@ -13,9 +13,6 @@ SRC_URI="https://haible.de/bruno/gnu/${ORIG_PN}-1.13-20170225.tar.gz"
 
 MAKEOPTS=" -j1"
 
-export CFLAGS=${CFLAGS:-"-O2 -pipe"};
-export CXXFLAGS=${CXXFLAGS:-"-O2 -pipe"};
-
 src_compile() {
    lndirs
    cd ${B}
