@@ -1,21 +1,54 @@
 ORIG_PN="libffcall"
 NAME="ffcall"
-VERSION=1.13-20170225
+VERSION=2.1
 RELEASE=1
-CATEGORY="Libs"
-SUMMARY="Foreign function call libraries"
-DESCRIPTION="This is a collection of four libraries which can be used to build
-foreign function call interfaces in embedded interpreters.  It is
-required by clisp."
+
+SUMMARY="Foreign function call library"
+DESCRIPTION="libffcall is a library which can be used to build foreign function
+call interfaces in embedded interpreters."
 HOMEPAGE="https://www.gnu.org/software/${ORIG_PN}"
 
-SRC_URI="https://haible.de/bruno/gnu/${ORIG_PN}-1.13-20170225.tar.gz"
+SRC_URI="mirror://gnu/${ORIG_PN}/${ORIG_PN}-${PV}.tar.gz"
+
+PKG_NAMES="libffcall0 libffcall-devel"
+
+libffcall_devel_OBSOLETES="ffcall"
+
+libffcall0_CATEGORY="Libs"
+
+# The different ABI numbers could get confusing in the future.  But
+# avcall and callback are part of ffcall now and are deprecated, so
+# they should disappear.  Not sure about trampline.
+libffcall0_CONTENTS="
+  usr/bin/cygavcall-1.dll
+  usr/bin/cygcallback-1.dll
+  usr/bin/cygffcall-0.dll
+  usr/bin/cygtrampoline-1.dll
+"
+
+libffcall_devel_CATEGORY="Devel Libs"
+libffcall_devel_CONTENTS="
+  usr/include
+  usr/lib/libavcall.dll.a
+  usr/lib/libcallback.dll.a
+  usr/lib/libffcall.dll.a
+  usr/lib/libtrampoline.dll.a
+  usr/lib/libvacall.a
+  usr/share
+"
+
+PKG_IGNORE="
+  usr/lib/libavcall.a
+  usr/lib/libcallback.a
+  usr/lib/libffcall.a
+  usr/lib/libtrampoline.a
+"
 
 MAKEOPTS=" -j1"
 
 src_compile() {
-   lndirs
-   cd ${B}
-   cygconf
-   cygmake 
+    # cygautoreconf fails, probably because of use of gnulib macros.
+    cd ${B}
+    cygconf
+    cygmake
 }
