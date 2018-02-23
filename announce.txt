@@ -1,0 +1,19 @@
+From cygwin-announce-ffcall-2.1-1 Fri Feb 23 15:16:44 2018
+From: Ken Brown <kbrown@cornell.edu>
+To: cygwin-announce@cygwin.com
+Date: Fri, 23 Feb 2018 15:16:44 -0500
+Subject: ffcall 2.1-1
+
+The following packages have been uploaded to the Cygwin distribution:
+
+* libffcall0-2.1-1
+* libffcall-devel-2.1-1
+
+libffcall is a library which can be used to build foreign function
+call interfaces in embedded interpreters.
+
+This is an update to the latest upstream release.  It is the first
+release for 64-bit Cygwin.
+
+Ken Brown
+Cygwin's ffcall maintainer
